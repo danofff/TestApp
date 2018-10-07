@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using TestApp.Infrastructure;
 
 namespace TestApp.Models
 {
@@ -21,9 +22,13 @@ namespace TestApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("TestDb", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

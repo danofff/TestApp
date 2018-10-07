@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestApp.Infrastructure;
+using TestApp.Models;
+using System.Data.Entity;
 
 namespace TestApp.Controllers
 {
@@ -10,7 +13,9 @@ namespace TestApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+           ApplicationDbContext db = new ApplicationDbContext();
+            
+            return View(db.Questions.Include(i=>i.Answers).ToList());
         }
 
         public ActionResult About()
