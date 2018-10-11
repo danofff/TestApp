@@ -1,0 +1,35 @@
+﻿@model List<TestApp.Infrastructure.Subject>
+
+@{
+    ViewBag.Title = "Test List";
+}
+
+<h2>Список тестов</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Список предметов",new {id="dropDownListId"})
+        @Html.DropDownList("Subject", new SelectList(Model,"SubjectId","SubjectName"),
+            "Выбетере предмет теста", new { @class = "form-control",id= "list" })
+    </div>
+}
+
+
+<script>
+    $(document).ready(function() {
+        $("#list").on("change", function () {
+            var id = $(this).val();
+            console.log(id);
+            $.ajax({
+                type: 'POST',
+                url: '/Test/GetTestList',
+                data: { subjectId: id },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+
+</script>

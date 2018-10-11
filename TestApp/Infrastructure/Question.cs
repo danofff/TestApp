@@ -8,6 +8,7 @@ namespace TestApp.Infrastructure
     public class Question
     {
         public int QuestionId { get; set; }
+        public int TestId { get; set; }
         public string QuestionText { get; set; }
         public List<Answer> Answers { get; set; }
     }
